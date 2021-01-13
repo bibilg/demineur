@@ -167,8 +167,6 @@ function Coup_joueur(&$tableau_affichage, $tableau_information, $nb_bombes, $nb_
                 Reveler_case($coup_x, $coup_y, $tableau_affichage, $tableau_information, $nb_bombes, $nb_cases_horizontales, $nb_cases_verticales, $partie_perdue, $partie_gagnee);
                 break;
         }
-
-        Affichage_tableau($tableau_affichage, $nb_cases_horizontales, $nb_cases_verticales);
     }
 }
 
@@ -344,28 +342,6 @@ function Afficher_grille_selon_deroulement($tableau_information, $tableau_affich
         echo PHP_EOL;
     }
 }
-
-/* Pour tester à supprimer */
-function Affichage_tableau($tab,$nb_cases_horizontales, $nb_cases_verticales)
-{
-    for( $y =0 ; $y < $nb_cases_verticales+4; $y++)
-    {
-        for( $x =0 ; $x < $nb_cases_horizontales +4; $x++)
-        {
-            if($tab[$x][$y] == -1)
-            {
-                echo 'B ';
-            }
-            else
-            {
-                echo $tab[$x][$y] . ' ';
-            }
-            
-        }
-        echo PHP_EOL;
-    }
-}
-
 
 
 $tableau_information=array();
