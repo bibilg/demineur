@@ -1,5 +1,9 @@
 <?php 
 
+// TODO : Reveler_cases_vides_autour si premier coup dans 0
+
+// TODO : Changer dans analyse qu'on test pas si a=0 et b=0 ( vu qu'on test si -1 )
+
 /* FP1 : Initialiser */
 function Initialiser(&$tableau_information, &$tableau_affichage, &$nb_cases_horizontales, &$nb_cases_verticales, &$nb_bombes)
 {
@@ -309,7 +313,7 @@ function Afficher_grille_entiere($tableau_information, $nb_cases_horizontales, $
             }
             else
             {
-                echo $tab[$x][$y] . ' ';
+                echo $tableau_information[$x][$y] . ' ';
             }
             
         }
@@ -369,23 +373,19 @@ $tableau_affichage= array();
 $nb_cases_horizontales=null;
 $nb_cases_verticales = null;
 $nb_bombes=null;
-$partie_perdue=null;
-$partie_gagnee=null;
+$partie_perdue=false;
+$partie_gagnee=false;
 
 Initialiser($tableau_information, $tableau_affichage, $nb_cases_horizontales, $nb_cases_verticales, $nb_bombes);
 Affichage($tableau_affichage, $tableau_information, $partie_perdue, $partie_gagnee, $nb_cases_horizontales, $nb_cases_verticales);
+
 
 do
 {
     Coup_joueur($tableau_affichage, $tableau_information, $nb_bombes, $nb_cases_horizontales, $nb_cases_verticales,$partie_perdue, $partie_gagnee);
     Affichage($tableau_affichage, $tableau_information, $partie_perdue, $partie_gagnee, $nb_cases_horizontales, $nb_cases_verticales);
 
-    $partie_terminee=false;
 
-    if( ($partie_gagnee==true) || ($partie_perdue==true) )
-    {
-        $partie_terminee=true;
-    }
+} while( ($partie_gagnee==false) && ($partie_perdue==false) );
 
-} while($partie_terminee=false );
  
