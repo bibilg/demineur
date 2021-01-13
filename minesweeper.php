@@ -107,7 +107,7 @@ function Placement_bombes(&$tableau_information, $nb_cases_horizontales, $nb_cas
         {
             $i--;
         }
-        elseif( ($x == $premier_coup_x) && ($y == $premier_coup_y))
+        elseif( ($x == $premier_coup_x) && ($y == $premier_coup_y)) // A regarder avec tableau 0 ( rajouter +1 ?)
         {
             $i--;
         }
@@ -125,12 +125,9 @@ function Incrementer_autour_bombe(&$tableau_information, $x, $y)
     {
         for( $b = -1 ; $b < 2 ; $b++)
         {
-            if( ($a!=0) && ($b!=0) )
+            if( $tableau_information[$x+$b][$y+$a] != -1 )
             {
-                if( $tableau_information[$x+$b][$y+$a] >= 0 )
-                {
-                    $tableau_information[$x+$b][$y+$a]++;
-                }
+                $tableau_information[$x+$b][$y+$a]++;
             }
         }
     }
@@ -139,9 +136,9 @@ function Incrementer_autour_bombe(&$tableau_information, $x, $y)
 /* Pour tester à supprimer */
 function Affichage_tableau($tab,$nb_cases_horizontales, $nb_cases_verticales)
 {
-    for( $y =0 ; $y < $nb_cases_verticales; $y++)
+    for( $y =0 ; $y < $nb_cases_verticales+4; $y++)
     {
-        for( $x =0 ; $x < $nb_cases_horizontales; $x++)
+        for( $x =0 ; $x < $nb_cases_horizontales +4; $x++)
         {
             if($tab[$x][$y] == -1)
             {
@@ -165,5 +162,5 @@ $nb_cases_horizontales=null;
 $nb_cases_verticales = null;
 $nb_bombes=null;
 
-Initialiser($tableau_information, $tableau_affichage, $nb_cases_horizontales, $nb_cases_verticales, $nb_bombes );
+Initialiser($tableau_information, $tableau_affichage, $nb_cases_horizontales, $nb_cases_verticales, $nb_bombes);
 
