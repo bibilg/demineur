@@ -28,11 +28,9 @@ function Initialiser(&$tableau_information, &$tableau_affichage, &$nb_cases_hori
     $premier_coup_x=null;
     $premier_coup_y=null;
 
-    Position_premier_coup($premier_coup_x, $premier_coup_y, $nb_cases_horizontales, $nb_cases_verticales);
+    Position_premier_coup($premier_coup_x, $premier_coup_y, $nb_cases_horizontales, $nb_cases_verticales, $tableau_affichage);
 
     Placement_bombes($tableau_information, $nb_cases_horizontales, $nb_cases_verticales, $premier_coup_x, $premier_coup_y, $nb_bombes);
-
-    Affichage_tableau($tableau_information, $nb_cases_horizontales, $nb_cases_verticales);
 }
 
 /* FS 1.1 : Initialisation_debutant  */
@@ -85,13 +83,15 @@ function Initialisation_tableaux($nb_cases_horizontales, $nb_cases_verticales, &
 }
 
 // FS 1.5 : Position_premier_coup
-function Position_premier_coup(&$premier_coup_x, &$premier_coup_y, $nb_cases_horizontales, $nb_cases_verticales)
+function Position_premier_coup(&$premier_coup_x, &$premier_coup_y, $nb_cases_horizontales, $nb_cases_verticales, &$tableau_affichage)
 {
     echo 'Quel est la position en X de votre premier coup ? (Maximum ' . $nb_cases_horizontales . ')' . PHP_EOL;
     $premier_coup_x = readline();
 
     echo 'Quel est la position en Y de votre premier coup ? (Maximum ' . $nb_cases_verticales . ')' . PHP_EOL;
     $premier_coup_y = readline();
+
+    $tableau_affichage[$premier_coup_x-1][$premier_coup_y-1]='R';
 }
 
 // FS 1.6 : Placement_bombes
@@ -160,7 +160,7 @@ function Coup_joueur(&$tableau_affichage, $tableau_information, $nb_bombes, $nb_
                 Enlever_drapeau($coup_x, $coup_y, $tableau_affichage);
                 break;
             case 3:
-                //Reveler_case();
+                Reveler_case($coup_x, $coup_y, $tableau_affichage, $tableau_information, $nb_bombes, $nb_cases_horizontales, $nb_cases_verticales, $partie_perdue, $partie_gagnee);
                 break;
         }
 
@@ -382,12 +382,10 @@ do
 
     $partie_terminee=false;
 
-    if( ($partie_gagnee==false) || ($partie_perdue==false) )
+    if( ($partie_gagnee==true) || ($partie_perdue==true) )
     {
         $partie_terminee=true;
     }
 
 } while($partie_terminee=false );
-
-echo 'Termine';
  
